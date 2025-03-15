@@ -2,6 +2,7 @@ package com.example.tools.controller;
 
 import com.example.tools.dto.PostDTO;
 import com.example.tools.services.PostService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,4 +32,8 @@ public class PostController {
         return postService.getPostById(postId);
     }
 
+    @PutMapping(path="/{postId}")
+    public PostDTO updatePost(@PathVariable Long postId, @RequestBody PostDTO postDTO) {
+        return postService.updatePost(postId, postDTO);
+    }
 }

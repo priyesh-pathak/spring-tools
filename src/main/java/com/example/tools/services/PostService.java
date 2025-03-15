@@ -40,4 +40,16 @@ public class PostService implements PostServiceInterface {
 //        return modelMapper.map(postEntity, PostDTO.class);
         return postRepo.findById(postId).map(post -> modelMapper.map(post, PostDTO.class)).orElse(null);
     }
+
+    public PostDTO updatePost(Long postId, PostDTO inputPost) {
+        PostEntity oldPost = postRepo.findById(postId).orElse(null);
+        modelMapper.map(inputPost,oldPost);
+        return modelMapper.map(postRepo.save(oldPost),PostDTO.class);
+
+//        return postRepo.findById(postId)
+//                .map(post -> {
+//                    modelMapper.map(inputPost, post);
+//                    return modelMapper.map(postRepo.save(post), PostDTO.class);
+//                }).orElse(null);
+    }
 }
